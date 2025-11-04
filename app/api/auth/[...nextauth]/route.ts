@@ -14,6 +14,8 @@ export const authOptions: NextAuthOptions = {
   ],
 
   session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
 
   callbacks: {
     async jwt({ token, user }) {
@@ -29,7 +31,6 @@ export const authOptions: NextAuthOptions = {
   },
 
   events: {
-    // Create user profile on first sign-in
     async createUser({ user }) {
       try {
         const client = await clientPromise;
@@ -69,6 +70,21 @@ export const authOptions: NextAuthOptions = {
           );
       } catch (err) {
         console.error("⚠️ Error updating login timestamp:", err);
+      }
+    },
+  },
+
+  // ✅ This is the correct place for error logging
+  logger: {
+    error(code, metadata) {
+      console.error("🔴 NextAuth Error:", code, metadata);
+    },
+    warn(code) {
+      console.warn("⚠️ NextAuth Warning:", code);
+    },
+    debug(code, metadata) {
+      if (process.env.NODE_ENV === "development") {
+        console.log("🪶 NextAuth Debug:", code, metadata);
       }
     },
   },

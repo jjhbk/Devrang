@@ -106,7 +106,9 @@ export default function AdminDashboard() {
   };
 
   // 🔒 Only admin access (client-side)
-  const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const adminEmails =
+    process.env.NEXT_PUBLIC_ADMIN_EMAILS?.split(",").map((e) => e.trim()) || [];
+  const isAdmin = adminEmails.includes(session?.user?.email || "");
 
   if (status === "loading") return <p className="p-6">Loading...</p>;
   if (!isAdmin)
