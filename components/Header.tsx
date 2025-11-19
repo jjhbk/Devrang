@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { UserCircleIcon, LogoutIcon } from "./Icons";
+import { UserCircle, LogOut, Sun } from "lucide-react";
 
 const Header: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -17,25 +17,30 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className="sticky top-0 z-30 flex items-center justify-between px-6 py-3 
-      bg-white/70 backdrop-blur-lg border-b border-violet-200 shadow-sm"
+      className="sticky top-0 z-30 flex items-center justify-between px-8 py-4 
+      bg-[#FDFBF7]/90 backdrop-blur-md border-b border-stone-200"
     >
       {/* Left section (brand or breadcrumbs) */}
-      <h1
-        className="text-lg font-serif font-bold tracking-wide bg-gradient-to-r 
-        from-violet-600 via-purple-500 to-amber-400 bg-clip-text text-transparent"
-      >
-        AstroGems
-      </h1>
+      <div className="md:hidden flex items-center gap-2">
+        <Sun className="w-6 h-6 text-orange-500" />
+        <h1 className="text-xl font-bold tracking-wider text-red-900 uppercase font-sans">
+          Devrang
+        </h1>
+      </div>
+      <div className="hidden md:block">
+        {/* Placeholder for page title or breadcrumb if needed, otherwise empty to push user to right */}
+        <span className="text-stone-500 text-sm font-medium tracking-wide">
+          Welcome back
+        </span>
+      </div>
 
       {/* Right: user avatar dropdown */}
       <div className="relative">
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="relative z-10 block h-10 w-10 overflow-hidden rounded-full 
-            flex items-center justify-center border border-violet-200 
-            bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md 
-            hover:shadow-lg hover:scale-105 transition-all duration-200"
+          className="relative z-10 flex items-center justify-center h-10 w-10 rounded-full 
+            border border-stone-300 bg-white text-stone-600 shadow-sm 
+            hover:shadow-md transition-all duration-200 focus:outline-none"
         >
           {session?.user?.image ? (
             <img
@@ -44,7 +49,7 @@ const Header: React.FC = () => {
               className="h-10 w-10 rounded-full object-cover"
             />
           ) : (
-            <UserCircleIcon className="w-7 h-7" />
+            <UserCircle className="w-6 h-6" />
           )}
         </button>
 
@@ -56,35 +61,34 @@ const Header: React.FC = () => {
             ></div>
 
             <div
-              className="absolute right-0 mt-3 w-56 bg-white/90 backdrop-blur-md 
-              border border-violet-100 rounded-xl shadow-xl z-20 overflow-hidden"
+              className="absolute right-0 mt-3 w-56 bg-white 
+              border border-stone-100 rounded-lg shadow-xl z-20 overflow-hidden ring-1 ring-black ring-opacity-5"
             >
               {status === "authenticated" ? (
                 <>
-                  <div className="px-4 py-3">
-                    <p className="text-sm font-semibold text-violet-700">
+                  <div className="px-4 py-3 bg-stone-50/50">
+                    <p className="text-sm font-serif font-semibold text-stone-800">
                       {session.user?.name || "User"}
                     </p>
-                    <p className="text-xs text-gray-500 truncate">
+                    <p className="text-xs text-stone-500 truncate">
                       {session.user?.email}
                     </p>
                   </div>
 
-                  <div className="border-t border-violet-100"></div>
+                  <div className="border-t border-stone-100"></div>
 
                   <button
                     onClick={handleLogout}
                     className="w-full text-left flex items-center gap-2 px-4 py-3 
-                      text-sm text-violet-700 hover:bg-gradient-to-r 
-                      hover:from-violet-500 hover:to-purple-600 hover:text-white 
-                      transition-all"
+                      text-sm text-stone-600 hover:bg-amber-50 hover:text-amber-900 
+                      transition-colors"
                   >
-                    <LogoutIcon className="w-5 h-5" />
+                    <LogOut className="w-4 h-4" />
                     Logout
                   </button>
                 </>
               ) : (
-                <div className="px-4 py-3 text-sm text-gray-500">
+                <div className="px-4 py-3 text-sm text-stone-500">
                   Not signed in
                 </div>
               )}

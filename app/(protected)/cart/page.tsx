@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useAppContext } from "../../../context/AppContext";
 import { Customer } from "../../../types";
-import { TrashIcon } from "../../../components/Icons";
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -112,7 +112,7 @@ const CartPage: React.FC = () => {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
           amount: order.amount,
           currency: order.currency,
-          name: "AstroGems",
+          name: "devrang",
           description: `Order for ${items.length} item(s)`,
           order_id: order.id,
           prefill: {
@@ -120,7 +120,7 @@ const CartPage: React.FC = () => {
             email: customer.email,
             contact: customer.phone,
           },
-          theme: { color: "#8B5CF6" },
+          theme: { color: "#78350F" }, // Amber 900
           handler: async (response: any) => {
             try {
               const verify = await fetch("/api/razorpay/verify", {
@@ -186,58 +186,60 @@ const CartPage: React.FC = () => {
       <div className="bg-white p-8 rounded-lg shadow-lg text-center">
         {confirmation.type === "self" ? (
           <>
-            <h1 className="text-3xl font-bold text-green-600 mb-4">
+            <h1 className="text-3xl font-serif font-bold text-green-700 mb-4">
               Payment Successful 🎉
             </h1>
-            <p className="text-gray-700 mb-2">
+            <p className="text-stone-600 mb-2">
               Order ID: {confirmation.orderId}
             </p>
-            <p className="text-gray-700 mb-2">
+            <p className="text-stone-600 mb-2">
               Payment ID: {confirmation.paymentId}
             </p>
-            <p className="text-gray-700 mb-4">
+            <p className="text-stone-600 mb-4">
               Customer: <strong>{confirmation.customer.name}</strong>
             </p>
-            <p className="text-lg font-semibold">
+            <p className="text-lg font-semibold text-amber-900">
               Total: ₹{confirmation.total.toFixed(2)}
             </p>
             <button
               onClick={() => router.push("/bookings")}
-              className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="mt-6 px-6 py-3 bg-amber-900 text-white rounded-md hover:bg-amber-800 transition-colors"
             >
               View My Orders
             </button>
           </>
         ) : (
           <>
-            <h1 className="text-2xl font-bold text-amber-600 mb-4">
+            <h1 className="text-2xl font-serif font-bold text-amber-700 mb-4">
               Payment Link Generated 🔗
             </h1>
-            <p className="text-gray-700 mb-2">
+            <p className="text-stone-600 mb-2">
               Order ID: {confirmation.orderId}
             </p>
-            <p className="text-gray-700 mb-4">
+            <p className="text-stone-600 mb-4">
               Share this link with <strong>{confirmation.customer.name}</strong>
             </p>
             <input
               readOnly
               value={confirmation.paymentLink}
-              className="w-full max-w-md p-2 border rounded-md bg-gray-100 text-center"
+              className="w-full max-w-md p-2 border border-stone-300 rounded-md bg-stone-50 text-center text-stone-600"
             />
-            <button
-              onClick={() =>
-                navigator.clipboard.writeText(confirmation.paymentLink)
-              }
-              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              Copy Payment Link
-            </button>
-            <button
-              onClick={() => router.push("/bookings")}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              Go to Orders
-            </button>
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                onClick={() =>
+                  navigator.clipboard.writeText(confirmation.paymentLink)
+                }
+                className="px-4 py-2 bg-stone-600 text-white rounded-md hover:bg-stone-700 transition-colors"
+              >
+                Copy Payment Link
+              </button>
+              <button
+                onClick={() => router.push("/bookings")}
+                className="px-4 py-2 bg-amber-900 text-white rounded-md hover:bg-amber-800 transition-colors"
+              >
+                Go to Orders
+              </button>
+            </div>
           </>
         )}
       </div>
@@ -247,21 +249,21 @@ const CartPage: React.FC = () => {
   // ✅ Main Checkout UI
   return (
     <div>
-      <h1 className="text-3xl font-bold text-text-main mb-6">
+      <h1 className="text-3xl font-serif font-bold text-amber-900 mb-6">
         Checkout / New Booking
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* 🛒 Cart Items */}
         <div className="lg:col-span-2">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Cart Items</h2>
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-stone-100">
+            <h2 className="text-xl font-serif font-semibold text-stone-700 mb-4">Cart Items</h2>
             {cart.length === 0 ? (
-              <p>
+              <p className="text-stone-500">
                 Your cart is empty.{" "}
                 <button
                   onClick={() => router.push("/products")}
-                  className="text-blue-600 hover:underline"
+                  className="text-amber-700 hover:underline font-medium"
                 >
                   Add products
                 </button>
@@ -270,16 +272,16 @@ const CartPage: React.FC = () => {
               cart.map((item) => (
                 <div
                   key={item.product.id}
-                  className="flex items-center gap-4 border-b py-4"
+                  className="flex items-center gap-4 border-b border-stone-100 py-4 last:border-0"
                 >
                   <img
                     src={item.product.imageUrl}
                     alt={item.product.name}
-                    className="w-16 h-16 rounded-md object-cover"
+                    className="w-16 h-16 rounded-md object-cover border border-stone-200"
                   />
                   <div className="flex-grow">
-                    <p className="font-semibold">{item.product.name}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="font-semibold text-stone-800">{item.product.name}</p>
+                    <p className="text-sm text-stone-500">
                       ₹{item.product.price}
                     </p>
                   </div>
@@ -292,13 +294,13 @@ const CartPage: React.FC = () => {
                         parseInt(e.target.value) || 1
                       )
                     }
-                    className="w-16 p-2 border rounded-md"
+                    className="w-16 p-2 border border-stone-200 rounded-md text-center focus:border-amber-500 focus:outline-none"
                   />
                   <button
                     onClick={() => removeFromCart(item.product.id as string)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-stone-400 hover:text-red-500 transition-colors"
                   >
-                    <TrashIcon className="w-6 h-6" />
+                    <Trash2 className="w-5 h-5" />
                   </button>
                 </div>
               ))
@@ -308,8 +310,8 @@ const CartPage: React.FC = () => {
 
         {/* 💰 Order Summary */}
         <div>
-          <div className="bg-white p-6 rounded-lg shadow-md sticky top-8">
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-stone-100 sticky top-8">
+            <h2 className="text-xl font-serif font-semibold text-stone-700 mb-4">Order Summary</h2>
             <select
               onChange={(e) =>
                 setSelectedCustomer(
@@ -318,7 +320,7 @@ const CartPage: React.FC = () => {
                     : customers.find((c) => c._id === e.target.value) || null
                 )
               }
-              className="w-full p-2 border border-gray-300 rounded-md mb-4"
+              className="w-full p-2 border border-stone-300 rounded-md mb-4 bg-stone-50 focus:border-amber-500 focus:outline-none"
             >
               <option value="">-- Select Customer --</option>
               <option value="self">Self-booking</option>
@@ -329,7 +331,7 @@ const CartPage: React.FC = () => {
               ))}
             </select>
 
-            <div className="flex justify-between font-bold text-lg mb-4">
+            <div className="flex justify-between font-bold text-lg mb-4 text-stone-800">
               <span>Total:</span>
               <span>₹{cartTotal.toFixed(2)}</span>
             </div>
@@ -337,10 +339,10 @@ const CartPage: React.FC = () => {
             <button
               onClick={handleCheckout}
               disabled={isProcessing || cart.length === 0 || !selectedCustomer}
-              className={`w-full py-3 rounded-md font-semibold ${
+              className={`w-full py-3 rounded-md font-semibold transition-all ${
                 isProcessing || cart.length === 0 || !selectedCustomer
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 text-white shadow-md"
+                  ? "bg-stone-300 text-stone-500 cursor-not-allowed"
+                  : "bg-amber-900 hover:bg-amber-800 text-white shadow-md hover:shadow-lg"
               }`}
             >
               {isProcessing

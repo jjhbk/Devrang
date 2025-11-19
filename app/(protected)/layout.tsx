@@ -65,11 +65,11 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({
 
   // Step 5: Only admin or approved users can see dashboard
   return (
-    <div className="flex h-screen bg-gray-100 font-sans">
+    <div className="flex h-screen bg-[#FDFBF7] font-sans text-stone-800">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-background">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#FDFBF7]">
           <div className="container mx-auto px-6 py-8">{children}</div>
         </main>
       </div>

@@ -3,29 +3,30 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Product } from "../../../types";
 import { useAppContext } from "../../../context/AppContext";
+import { Search } from "lucide-react";
 
 const ProductCard: React.FC<{
   product: Product;
   onAddToCart: (product: Product, quantity: number) => void;
 }> = ({ product, onAddToCart }) => {
   return (
-    <div className="card flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300">
+    <div className="card flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border border-stone-100">
       <img
         src={product.imageUrl}
         alt={product.name}
-        className="w-full h-48 object-cover bg-[#f3eaff]"
+        className="w-full h-48 object-cover bg-stone-100"
       />
       <div className="p-4 flex flex-col flex-grow">
-        <h3 className="product-title">{product.name}</h3>
-        <p className="product-subtitle">
+        <h3 className="text-lg font-serif font-semibold text-stone-800">{product.name}</h3>
+        <p className="text-xs uppercase tracking-wide text-stone-500 mb-2">
           {product.type} — {product.size}
         </p>
-        <p className="product-description flex-grow">{product.use}</p>
-        <div className="mt-4 flex justify-between items-center">
-          <span className="product-price">${product.price.toFixed(2)}</span>
+        <p className="text-sm text-stone-600 flex-grow mb-4 line-clamp-3">{product.use}</p>
+        <div className="mt-auto flex justify-between items-center">
+          <span className="text-lg font-bold text-amber-900">${product.price.toFixed(2)}</span>
           <button
             onClick={() => onAddToCart(product, 1)}
-            className="btn-primary px-4 py-2 rounded-md text-sm hover:scale-105 active:scale-95 transition-transform"
+            className="btn-primary px-4 py-2 rounded-md text-sm hover:scale-105 active:scale-95 transition-transform bg-amber-900 text-white"
           >
             Add to Cart
           </button>
@@ -101,28 +102,33 @@ const ProductsPage: React.FC = () => {
   return (
     <div>
       {notification && (
-        <div className="fixed top-20 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+        <div className="fixed top-20 right-5 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 font-medium">
           {notification}
         </div>
       )}
 
-      <h1 className="text-3xl font-bold text-text-main mb-6">
+      <h1 className="text-3xl font-serif font-bold text-amber-900 mb-6">
         Product Marketplace
       </h1>
 
       {/* Search and filters */}
-      <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-violet-100 shadow-md mb-6 flex flex-wrap items-center gap-4">
-        <input
-          type="text"
-          placeholder="🔍 Search by name or use..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow p-2 border border-violet-200 rounded-md focus:ring-violet-400 focus:border-violet-400 placeholder-violet-400 text-violet-800"
-        />
+      <div className="bg-white/80 backdrop-blur-md p-4 rounded-lg border border-stone-200 shadow-sm mb-8 flex flex-wrap items-center gap-4">
+        <div className="relative flex-grow">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-stone-400" />
+            </div>
+            <input
+            type="text"
+            placeholder="Search by name or use..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 placeholder-stone-400 text-stone-800"
+            />
+        </div>
         <select
           value={filterType}
           onChange={(e) => setFilterType(e.target.value)}
-          className="p-2 border border-violet-200 rounded-md text-violet-700 focus:ring-violet-400 focus:border-violet-400"
+          className="p-2 border border-stone-300 rounded-md text-stone-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white"
         >
           {productTypes.map((type) => (
             <option key={type} value={type}>
@@ -133,7 +139,7 @@ const ProductsPage: React.FC = () => {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="p-2 border border-violet-200 rounded-md text-violet-700 focus:ring-violet-400 focus:border-violet-400"
+          className="p-2 border border-stone-300 rounded-md text-stone-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white"
         >
           <option value="name-asc">Sort by Name (A–Z)</option>
           <option value="name-desc">Sort by Name (Z–A)</option>
@@ -144,13 +150,13 @@ const ProductsPage: React.FC = () => {
 
       {/* Product grid */}
       {loading ? (
-        <div className="flex justify-center items-center py-20 text-violet-600">
+        <div className="flex justify-center items-center py-20 text-stone-500">
           Loading products...
         </div>
       ) : error ? (
         <div className="text-red-600 text-center py-10">{error}</div>
       ) : filteredAndSortedProducts.length === 0 ? (
-        <div className="text-center text-violet-700 py-10">
+        <div className="text-center text-stone-500 py-10">
           No products match your search.
         </div>
       ) : (

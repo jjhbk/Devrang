@@ -7,13 +7,13 @@ const BookingDetailsModal: React.FC<{
   order: any;
   onClose: () => void;
 }> = ({ order, onClose }) => (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl overflow-y-auto max-h-[90vh]">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
-        Order Details (ID: {order.order_id})
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm">
+    <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl overflow-y-auto max-h-[90vh] border border-stone-200">
+      <h2 className="text-2xl font-serif font-bold text-amber-900 mb-4">
+        Order Details <span className="text-base font-sans font-normal text-stone-500">(ID: {order.order_id})</span>
       </h2>
 
-      <div className="grid grid-cols-2 gap-4 mb-4 text-sm text-gray-700">
+      <div className="grid grid-cols-2 gap-4 mb-4 text-sm text-stone-700">
         <div>
           <strong>Customer:</strong> {order.customer?.name || "Unknown"}
         </div>
@@ -27,29 +27,29 @@ const BookingDetailsModal: React.FC<{
         </div>
         <div>
           <strong>Total:</strong>{" "}
-          <span className="font-bold text-lg text-primary">
+          <span className="font-bold text-lg text-amber-900">
             ₹{order.amount.toFixed(2)}
           </span>
         </div>
       </div>
 
-      <h3 className="font-semibold mb-2 text-gray-800">Items:</h3>
-      <ul className="border-t border-b divide-y mb-4">
+      <h3 className="font-semibold mb-2 text-stone-800">Items:</h3>
+      <ul className="border-t border-stone-100 border-b divide-y divide-stone-100 mb-6">
         {order.items?.map((item: any, idx: number) => (
-          <li key={idx} className="flex justify-between py-2 text-gray-700">
+          <li key={idx} className="flex justify-between py-3 text-stone-700">
             <div className="flex items-center gap-3">
               {item.imageUrl && (
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="w-10 h-10 object-cover rounded-md"
+                  className="w-10 h-10 object-cover rounded-md border border-stone-200"
                 />
               )}
               <span>
-                {item.name} ×{item.quantity}
+                {item.name} <span className="text-stone-500">×{item.quantity}</span>
               </span>
             </div>
-            <span>₹{(item.price * item.quantity).toFixed(2)}</span>
+            <span className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</span>
           </li>
         ))}
       </ul>
@@ -57,7 +57,7 @@ const BookingDetailsModal: React.FC<{
       <div className="flex justify-end">
         <button
           onClick={onClose}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          className="px-6 py-2 bg-stone-600 text-white rounded-md hover:bg-stone-700 transition-colors"
         >
           Close
         </button>
@@ -101,13 +101,13 @@ const BookingsPage: React.FC = () => {
     switch (status) {
       case "paid":
       case "captured":
-        return "bg-green-100 text-green-800";
+        return "bg-green-100 text-green-800 border border-green-200";
       case "created":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-amber-100 text-amber-800 border border-amber-200";
       case "delivered":
-        return "bg-blue-100 text-blue-800";
+        return "bg-blue-100 text-blue-800 border border-blue-200";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-stone-100 text-stone-600 border border-stone-200";
     }
   };
 
@@ -120,15 +120,15 @@ const BookingsPage: React.FC = () => {
         />
       )}
 
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">My Orders</h1>
+      <h1 className="text-3xl font-serif font-bold text-amber-900 mb-6">My Orders</h1>
 
-      <div className="bg-white p-4 rounded-lg shadow-md mb-6">
+      <div className="bg-white p-4 rounded-lg shadow-sm border border-stone-200 mb-6">
         <div className="flex items-center gap-4">
-          <span>Filter by status:</span>
+          <span className="text-stone-600 font-medium">Filter by status:</span>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md"
+            className="p-2 border border-stone-300 rounded-md text-stone-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:outline-none"
           >
             <option value="All">All</option>
             <option value="created">Created</option>
@@ -139,14 +139,14 @@ const BookingsPage: React.FC = () => {
       </div>
 
       {loading ? (
-        <p className="text-center text-gray-500">Loading orders...</p>
+        <p className="text-center text-stone-500 py-8">Loading orders...</p>
       ) : filteredOrders.length === 0 ? (
-        <p className="text-center p-6 text-gray-500">No orders found.</p>
+        <p className="text-center p-6 text-stone-500">No orders found.</p>
       ) : (
-        <div className="bg-white rounded-lg shadow-md overflow-x-auto">
+        <div className="bg-white rounded-lg shadow-sm border border-stone-200 overflow-x-auto">
           <table className="w-full whitespace-nowrap">
-            <thead className="bg-gray-100">
-              <tr className="text-left text-gray-800">
+            <thead className="bg-stone-50 border-b border-stone-200">
+              <tr className="text-left text-stone-700 font-medium">
                 <th className="px-6 py-3">Order ID</th>
                 <th className="px-6 py-3">Date</th>
                 <th className="px-6 py-3">Items</th>
@@ -155,28 +155,28 @@ const BookingsPage: React.FC = () => {
                 <th className="px-6 py-3">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-stone-100">
               {filteredOrders.map((order) => (
-                <tr key={order._id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                <tr key={order._id} className="hover:bg-stone-50/50 transition-colors">
+                  <td className="px-6 py-4 text-sm text-stone-500 font-mono">
                     {order.order_id}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-stone-700">
                     {new Date(order.createdAt).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 text-sm">
+                  <td className="px-6 py-4 text-sm text-stone-600">
                     {order.items
                       ?.slice(0, 2)
                       .map((i: any) => i.name)
                       .join(", ")}
                     {order.items?.length > 2 && (
-                      <span className="text-gray-400">
+                      <span className="text-stone-400 italic">
                         {" "}
                         +{order.items.length - 2} more
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 font-semibold">
+                  <td className="px-6 py-4 font-semibold text-stone-800">
                     ₹{order.amount.toFixed(2)}
                   </td>
                   <td className="px-6 py-4">
@@ -191,7 +191,7 @@ const BookingsPage: React.FC = () => {
                   <td className="px-6 py-4">
                     <button
                       onClick={() => setSelectedOrder(order)}
-                      className="text-blue-600 hover:underline"
+                      className="text-amber-700 hover:underline hover:text-amber-900 font-medium"
                     >
                       View Details
                     </button>

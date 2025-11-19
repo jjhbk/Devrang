@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Customer } from "../../../types";
 import CustomerFormModal from "@/components/CustomersPage";
+
 const CustomersPage: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -91,64 +92,64 @@ const CustomersPage: React.FC = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-text-main">Manage Customers</h1>
+        <h1 className="text-3xl font-serif font-bold text-amber-900">Manage Customers</h1>
         <button
           onClick={() => {
             setEditingCustomer(null);
             setIsModalOpen(true);
           }}
-          className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-focus"
+          className="px-4 py-2 bg-amber-900 text-white rounded-md hover:bg-amber-800 shadow-sm transition-colors"
         >
           Add New Customer
         </button>
       </div>
 
       {/* Search */}
-      <div className="bg-white p-4 rounded-lg shadow-md mb-6">
+      <div className="bg-white p-4 rounded-lg shadow-sm border border-stone-200 mb-6">
         <input
           type="text"
           placeholder="Search by name or phone..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md"
+          className="w-full p-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
         />
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-x-auto">
+      <div className="bg-white rounded-lg shadow-sm border border-stone-200 overflow-x-auto">
         {loading ? (
-          <p className="text-center p-6 text-gray-500">Loading...</p>
+          <p className="text-center p-6 text-stone-500">Loading...</p>
         ) : filteredCustomers.length === 0 ? (
-          <p className="text-center p-6 text-gray-500">No customers found.</p>
+          <p className="text-center p-6 text-stone-500">No customers found.</p>
         ) : (
           <table className="w-full whitespace-nowrap">
-            <thead className="bg-secondary">
-              <tr className="text-left text-primary">
+            <thead className="bg-stone-50 border-b border-stone-200">
+              <tr className="text-left text-stone-600 font-serif">
                 <th className="px-6 py-3">Name</th>
                 <th className="px-6 py-3">Phone</th>
                 <th className="px-6 py-3">Email</th>
                 <th className="px-6 py-3">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-stone-100">
               {filteredCustomers.map((c) => (
-                <tr key={c._id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4">{c.name}</td>
-                  <td className="px-6 py-4">{c.phone}</td>
-                  <td className="px-6 py-4">{c.email || "N/A"}</td>
+                <tr key={c._id} className="hover:bg-stone-50/50">
+                  <td className="px-6 py-4 text-stone-800">{c.name}</td>
+                  <td className="px-6 py-4 text-stone-600">{c.phone}</td>
+                  <td className="px-6 py-4 text-stone-600">{c.email || "N/A"}</td>
                   <td className="px-6 py-4">
                     <button
                       onClick={() => {
                         setEditingCustomer(c);
                         setIsModalOpen(true);
                       }}
-                      className="text-blue-600 hover:underline mr-4"
+                      className="text-amber-700 hover:underline mr-4 font-medium"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(c._id!)}
-                      className="text-red-600 hover:underline"
+                      className="text-red-600 hover:underline font-medium"
                     >
                       Delete
                     </button>

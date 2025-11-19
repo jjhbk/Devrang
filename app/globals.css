@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
-/* === Devrang Saffron Theme === */
+/* === Devrang Luxury Theme === */
 :root {
-  --background: #FFF5E6; /* Light Cream/Saffron tint */
-  --foreground: #4A2C2A; /* Dark Brown/Coffee */
-  --border-color: #FFCC99;
+  --background: #FDFBF7; /* Cream */
+  --foreground: #1C1917; /* Stone 900 */
+  --border-color: #E7E5E4; /* Stone 200 */
   --input-bg: #FFFFFF;
-  --placeholder-color: #996633;
-  --primary: #FF9933; /* Saffron */
-  --primary-focus: #E68A00;
-  --secondary: #800000; /* Deep Maroon */
-  --accent: #FFD700; /* Gold */
-  --text-main: #4A2C2A;
-  --text-light: #8B5A2B;
-  --card-bg: #FFFDF5;
+  --placeholder-color: #A8A29E; /* Stone 400 */
+  --primary: #78350F; /* Amber 900 */
+  --primary-focus: #451a03; /* Amber 950 */
+  --secondary: #57534E; /* Stone 600 */
+  --accent: #D97706; /* Amber 600 */
+  --text-main: #1C1917;
+  --text-light: #78716C; /* Stone 500 */
+  --card-bg: #FFFFFF;
 }
 
 html,
@@ -29,7 +29,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--secondary);
+  color: var(--primary);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 /* === Buttons === */
@@ -44,38 +45,40 @@ button {
   background-color: var(--primary);
   color: #fff;
   border: none;
-  box-shadow: 0 4px 10px rgba(255, 153, 51, 0.3);
+  box-shadow: 0 4px 10px rgba(120, 53, 15, 0.2);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-focus);
-  box-shadow: 0 6px 15px rgba(255, 153, 51, 0.4);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(120, 53, 15, 0.3);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background-color: var(--secondary);
-  color: #fff;
+  background-color: #fff;
+  color: var(--secondary);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-  background-color: #600000;
+  background-color: #fafaf9;
+  border-color: var(--secondary);
 }
 
 /* === Product Cards === */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(128, 0, 0, 0.05);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(128, 0, 0, 0.1);
-  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: var(--accent);
 }
 
 /* === Thoranam / Decoration === */
