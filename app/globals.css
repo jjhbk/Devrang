@@ -1,130 +1,95 @@
 @import "tailwindcss";
 
-/* === Refined Mystic Marketplace Theme === */
+/* === Devrang Saffron Theme === */
 :root {
-  --background: #f7f5ff; /* soft neutral violet-white */
-  --foreground: #2b165a; /* dark indigo */
-  --border-color: #e4daf8;
-  --input-bg: #ffffff;
-  --placeholder-color: #7c66a1;
-  --accent: #7c3aed; /* vivid violet */
-  --accent-hover: #6d28d9;
-  --golden-glow: #fbbf24; /* warm radiant gold */
-  --text-muted: #5b4a85;
+  --background: #FFF5E6; /* Light Cream/Saffron tint */
+  --foreground: #4A2C2A; /* Dark Brown/Coffee */
+  --border-color: #FFCC99;
+  --input-bg: #FFFFFF;
+  --placeholder-color: #996633;
+  --primary: #FF9933; /* Saffron */
+  --primary-focus: #E68A00;
+  --secondary: #800000; /* Deep Maroon */
+  --accent: #FFD700; /* Gold */
+  --text-main: #4A2C2A;
+  --text-light: #8B5A2B;
+  --card-bg: #FFFDF5;
 }
 
 html,
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: "Inter", "Noto Serif Display", system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   scroll-behavior: smooth;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* === Typography === */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Noto Serif Display", serif;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--foreground);
-}
-
-h1, h2 {
-  background: linear-gradient(90deg, var(--accent), var(--golden-glow));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-p, span, small {
-  color: var(--text-muted);
-  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--secondary);
 }
 
 /* === Buttons === */
 button {
   cursor: pointer;
   font-weight: 600;
-  border-radius: 9999px;
+  border-radius: 8px;
   transition: all 0.25s ease;
 }
 
 .btn-primary {
-  background-color: var(--accent);
+  background-color: var(--primary);
   color: #fff;
   border: none;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 10px rgba(255, 153, 51, 0.3);
 }
+
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+  background-color: var(--primary-focus);
+  box-shadow: 0 6px 15px rgba(255, 153, 51, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #600000;
 }
 
 /* === Product Cards === */
 .card {
-  background-color: var(--input-bg);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(128, 0, 0, 0.05);
   transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 10px 20px rgba(128, 0, 0, 0.1);
+  border-color: var(--primary);
 }
 
-/* === Product Text Styling === */
-.product-title {
-  font-weight: 600;
-  color: var(--foreground);
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
-.product-subtitle {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.product-description {
-  color: #6b5c99;
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-}
-
-.product-price {
-  font-weight: 700;
-  color: var(--accent);
-  font-size: 1.05rem;
-  margin-top: 0.5rem;
-}
-
-/* === Fix Image Display === */
-.card img {
+/* === Thoranam / Decoration === */
+.thoranam-border {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L20,20 L40,0 Z' fill='%23FF9933' /%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  height: 20px;
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  background-color: #f3eaff;
 }
 
-/* === Sidebar & Header Improvements === */
-aside, header {
-  background-color: #faf8ff;
-  color: var(--foreground);
+.thoranam-border-green {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L20,20 L40,0 Z' fill='%23228B22' /%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 100%;
 }
 
-.sidebar a {
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.sidebar a:hover {
-  color: var(--accent);
-}
-
-/* === Smoother Transitions === */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}

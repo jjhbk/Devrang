@@ -9,14 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ✅ Use CSS variable syntax that works with opacity utilities
-        primary: "rgb(var(--color-primary) / <alpha-value>)",
-        "primary-focus": "rgb(var(--color-primary-focus) / <alpha-value>)",
-        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-        accent: "rgb(var(--color-accent) / <alpha-value>)",
-        background: "rgb(var(--color-background) / <alpha-value>)",
-        "text-main": "rgb(var(--color-text-main) / <alpha-value>)",
-        "text-light": "rgb(var(--color-text-light) / <alpha-value>)",
+        primary: "var(--primary)",
+        "primary-focus": "var(--primary-focus)",
+        secondary: "var(--secondary)",
+        accent: "var(--accent)",
+        background: "var(--background)",
+        "text-main": "var(--text-main)",
+        "text-light": "var(--text-light)",
       },
     },
   },
