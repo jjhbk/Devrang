@@ -37,7 +37,7 @@ const SignInPopup: React.FC<SignInPopupProps> = ({
               <X size={20} />
             </button>
 
-            <h2 className="text-2xl font-serif text-amber-900 mb-2">
+            <h2 className="text-2xl font-bold text-amber-900 mb-2">
               Welcome to devrang
             </h2>
             <p className="text-stone-500 mb-6 text-sm">
